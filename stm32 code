@@ -1,0 +1,19 @@
+int main(void)
+{
+  HAL_Init();
+  SystemClock_Config();
+
+  MX_GPIO_Init();
+	  while (1)
+	    {
+	  	  if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0) == GPIO_PIN_SET) {
+	  	        // Motion detected
+	  	        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_SET);  // Turn on buzzer
+	  	        HAL_Delay(20);  // Buzzer sound duration
+	  	        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_RESET); // Turn off buzzer
+	  	      } else {
+	  	        // No motion detected, buzzer off
+	  	        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_RESET);
+	  	      }
+  }
+}
